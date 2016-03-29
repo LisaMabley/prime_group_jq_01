@@ -1,0 +1,17 @@
+.fruit {
+  border: 14px solid white;
+  display: inline-block;
+  float: left;
+  background-color: tomato;
+  width: 20%;
+  padding: 20px;
+  height: 200px;
+}
+
+img {
+  width: 75px;
+  border: none;
+}
+.inv {
+background-color: cornflowerblue;
+}
