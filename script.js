@@ -76,7 +76,13 @@ $(function(){
 	// Called after any fruit is bought or sold
 	function updatePlayerBalanceDisplay() {
      $("#balance").text("You have " + moneyReadable(playerBalance));
+	}
 
+	function updateAveragePriceDisplay() {
+		$(".apples_average").text("Average price: " + moneyReadable(appleBin.averagePrice));
+		$(".oranges_average").text("Average price: " + moneyReadable(orangeBin.averagePrice));
+		$(".bananas_average").text("Average price: " + moneyReadable(bananaBin.averagePrice));
+		$(".grapes_average").text("Average price: " + moneyReadable(grapeBin.averagePrice));
 	}
 
 	// Returns random number
@@ -89,14 +95,22 @@ $(function(){
 		this.name = binName;
 		this.playerInventory = 0;
 		this.price = 3.00;
+		this.totalPurchased = 0;
+		this.totalPrice = 0.00;
+		this.averagePrice = 0.00;
 
 		// Called when buy button is clicked
 		this.buy = function() {
 			if (playerBalance > this.price) {
 				playerBalance -= this.price;
 				this.playerInventory ++;
+				this.totalPurchased ++;
+				this.totalPrice += this.price;
+				this.updateAveragePrice();
+				updateAveragePriceDisplay();
 				updateInventoryDisplay();
 				updatePlayerBalanceDisplay();
+
 			} else {
 				alert("Come back after payday.");
 			}
@@ -104,7 +118,7 @@ $(function(){
 
 		// Called when sell button is clicked
 		this.sell = function() {
-			if (this.playerInventory > 1) {
+			if (this.playerInventory >= 1) {
 				playerBalance += this.price;
 				this.playerInventory --;
 				updateInventoryDisplay();
@@ -121,13 +135,24 @@ $(function(){
 			var determiner = randomNumber(1,2);
 
 			if (determiner === 1 && this.price < 9.50) {
+				// console.log("Increasing price");
 				this.price += ((randomNumber(1,50))/100);
 
 			} else if (this.price > .50) {
+				// console.log("Reducing price");
 				this.price -= ((randomNumber(1,50))/100);
 			}
 		}
-	}
+
+		this.updateAveragePrice = function() { //method can be called on fruit object
+			if (this.averagePrice == 0) {
+				this.averagePrice = this.price;
+
+			} else {
+				this.averagePrice = this.totalPrice / this.totalPurchased;
+			}
+		}
+	}//end of object constructor
 
 	function moneyReadable(num) {
 		return num.toLocaleString("en-US",{style: "currency", currency: "USD"});

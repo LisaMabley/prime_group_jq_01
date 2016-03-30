@@ -1,17 +1,56 @@
+body {
+  background-color: blanchedalmond;
+}
+
 .fruit {
-  border: 14px solid white;
+  border: 14px solid blanchedalmond;
   display: inline-block;
   float: left;
   background-color: tomato;
   width: 20%;
   padding: 20px;
-  height: 200px;
+  height: 260px;
+  border-radius: 20px;
+}
+
+button {
+  height: 30px;
+  width: 140px;
+  font-size: 16px;
+  font-family: sans-serif;
+  padding: 6px;
+  margin: 12px auto;
+  display: block;
 }
 
 img {
   width: 75px;
   border: none;
+  margin: 30px auto;
+  display: block;
+}
+
+.fruit .price {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  font-family: sans-serif;
 }
 .inv {
-background-color: cornflowerblue;
+  background-color: cornflowerblue;
+  height: 90px;
+  text-align: center;
+  font-size: 18px;
+  font-family: sans-serif;
+}
+
+#balance {
+  font-size: 50px;
+  font-family: sans-serif;
+  text-align: center;
+  margin: 36px;
+}
+
+.separator {
+  clear: both
 }
